@@ -1,2 +1,2 @@
 # ecomm
-Connect to visa masterkard
+Connect to visa mastercard
