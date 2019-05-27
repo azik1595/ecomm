@@ -264,7 +264,7 @@ echo $dochtml->saveHTML();
 // Redirect($payment->getRedirectUrl($transIDS) , false); 
 // header('Location: https://ecomm.yourbank.uz:9443/ecomm/ClientHandler?trans_id=' . urlencode($transIDS) , true, 301)
 ?>
- <form action = "https://ecomm.yourbank.uz:6443/ecomm2/ClientHandler" method = "GET">
+ <form action = "https://ecomm.yourbank.uz:8443/ecomm2/ClientHandler" method = "GET">
          trans_id: <input type = "text" name = "trans_id" id='trans_id_form'/>
          <input type = "submit" />
       </form>
