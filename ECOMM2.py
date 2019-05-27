@@ -1,14 +1,3 @@
-# CURLOPT_USERAGENT = > __CLASS__.' HTTP client',
-# CURLOPT_URL = > $this->paymentUrl,
-# CURLOPT_HEADER = > false,
-# CURLOPT_POST = > true,
-# CURLOPT_RETURNTRANSFER = > true,
-# CURLOPT_SSL_VERIFYHOST = > false,
-# CURLOPT_SSL_VERIFYPEER = > true,
-# CURLOPT_SSLKEY = > $this->keyDir. $this->merchantID.'.key',
-# CURLOPT_SSLCERT = > $this->keyDir. $this->merchantID.'.pem',
-# CURLOPT_CAINFO = > $this->keyDir.'chain-ecomm-ca-root-ca.crt',
-# CURLOPT_POSTFIELDS = > http_build_query($data),
 import pycurl
 import json
 import urllib.parse
@@ -35,11 +24,11 @@ closeDay = {
 def sendRequest(data):
  c = pycurl.Curl()
  buffer = BytesIO()
- c.setopt(pycurl.URL, "https://ecomm.hamkorbank.uz:7443/ecomm2/MerchantHandler")
+ c.setopt(pycurl.URL, "https://ecomm.yourbank.uz:9443/ecomm/MerchantHandler")
  c.setopt(pycurl.POST,True)
  c.setopt(pycurl.SSL_VERIFYHOST,False)
  c.setopt(pycurl.SSL_VERIFYPEER,True)
- c.setopt(pycurl.SSLKEYPASSWD, 'testabad')
+ c.setopt(pycurl.SSLKEYPASSWD, 'yourpass')
  c.setopt(pycurl.SSLCERT,'imakstore.pem')
  c.setopt(pycurl.CAINFO,'imakstore.pem')
  c.setopt(pycurl.WRITEFUNCTION, buffer.write)
@@ -50,19 +39,19 @@ def sendRequest(data):
  return str(htmlString)
 def getRedirectURL(trans_id):
     trans_id = {'trans_id': trans_id, }
-    return "https://ecomm.hamkorbank.uz:7443/ecomm2/ClientHandler"+str(urllib.parse.urlencode(trans_id))
+    return "https://ecomm.yourbank.uz:9443/ecomm/ClientHandler"+str(urllib.parse.urlencode(trans_id))
 def redirect(trans_id):
     c = pycurl.Curl()
     buffer = BytesIO()
     trans_id = {'trans_id': trans_id, }
-    c.setopt(pycurl.URL, "https://ecomm.hamkorbank.uz:7443/ecomm2/ClientHandler")
+    c.setopt(pycurl.URL, "https://ecomm.yourbank.uz:9443/ecomm/ClientHandler")
     c.setopt(pycurl.POST, True)
     c.setopt(pycurl.SSL_VERIFYHOST, False)
     c.setopt(pycurl.SSL_VERIFYPEER, True)
-    c.setopt(pycurl.SSLKEYPASSWD, 'testabad')
+    c.setopt(pycurl.SSLKEYPASSWD, 'yourpass')
     c.setopt(pycurl.TRANSFERTEXT, True)
-    c.setopt(pycurl.SSLCERT, 'imakstore.pem')
-    c.setopt(pycurl.CAINFO, 'imakstore.pem')
+    c.setopt(pycurl.SSLCERT, 'cert.pem')
+    c.setopt(pycurl.CAINFO, 'cert.pem')
     c.setopt(pycurl.WRITEFUNCTION, buffer.write)
     c.setopt(pycurl.POSTFIELDS, urllib.parse.urlencode(trans_id))
     c.perform()
